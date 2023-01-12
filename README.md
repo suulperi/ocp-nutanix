@@ -37,7 +37,7 @@ parameters:
   csi.storage.k8s.io/snapshotter-secret-namespace: openshift-cluster-csi-drivers
 deletionPolicy: Delete
 ```
-You can also use RH ACM Governance(policies) to enable iSCSI Daemon and Enable VolumeSnapshotClass. Policies can be found from [here](https://github.com/suulperi/ocp-nutanix/tree/main/policies)
+You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create VolumeSnapshotClass. Policies can be found from [here](https://github.com/suulperi/ocp-nutanix/tree/main/policies)
 
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
