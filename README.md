@@ -46,15 +46,15 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
      - VXLAN 4800/UDP
      - Submariner metrics port 8080/TCP
      - Globalnet metrics port 8081/TCP
-   - Deploy [these](https://github.com/suulperi/ocp-nutanix/tree/main/submariner) configurations on RH ACM Cluster - change values if currents are not suitable :
+   - Deploy [these](https://github.com/suulperi/ocp-nutanix/tree/main/submariner) configurations on RH ACM Cluster - change values like namespace if currents are not suitable :
      - `oc create -f 00-managedClusterSet.yaml`
      - `oc create -f 01-broker.yaml` - if network CIDRs are overlapping on both clusters `globalnetEnabled`value must be `true`
      - `oc label managedclusters <your-managed-cluster-name> "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite`
      - `oc label managedclusters <your-managed-cluster-name> "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite`
-     - `oc create -f 03-submarinerconfig-01.yaml` - pay attention on namespace value
-     - `oc create -f 03-submarinerconfig-02.yaml` - pay attention on namespace value
-     - `oc create -f 04-ManagedClusterAddOn-01.yaml` - pay attention on namespace value
-     - `oc create -f 04-ManagedClusterAddOn-02.yaml` - pay attention on namespace value
+     - `oc create -f 03-submarinerconfig-01.yaml`
+     - `oc create -f 03-submarinerconfig-02.yaml`
+     - `oc create -f 04-ManagedClusterAddOn-01.yaml`
+     - `oc create -f 04-ManagedClusterAddOn-02.yaml`
 
    - Check Submariner status by using RH ACM Web Console. If everything is green like in image below you are good to continue
 
