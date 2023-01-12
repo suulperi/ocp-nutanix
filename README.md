@@ -64,8 +64,9 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
    - Select one of the managed clusters from the Clusters page in the hub cluster and choose edit labels.
       - Add next label for your OCP `addons.open-cluster-management.io/volsync=true`
    - Repeat previous task on another managed cluster
-   - Verify on both clusters volSync Operator is installed running command `oc get csv -n openshift-operators` 
-   - 
+   - Verify on both clusters volSync Operator is installed by running command `oc get csv -n openshift-operators` 
+   - Now you are good to start configuring volSync(Use Case 2)
+ 
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
 
@@ -76,3 +77,12 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 
 ## Use Case 2 - Replicating data on persistent volume level from DC to another
 ![volSync Architecture](/pics/volsync-arch.png)
+
+This use case could be usable if you are having an stateful application which cannot be scaled out but you want to be sure you have at least data synchronized to another data center. But do remember backups are still mandatory and really usable with containers as well. You must have disaster recovery plan for each application.
+
+- Create Replication Destination
+- Create Submariner serviceExport
+- GET SSH
+- GET Secret
+- Implement Redis on Source Cluster
+- 
