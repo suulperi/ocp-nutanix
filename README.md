@@ -2,4 +2,4 @@
 Configuration files for running OpenShift on Nutanix including Submariner configuration
 
 
-![volSync Architecture] (https://github.com/suulperi/ocp-nutanix/blob/main/pics/volsync-arch.png)
+! [volSync Architecture] (/pics/volsync-arch.png)
