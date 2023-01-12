@@ -1,0 +1,14 @@
+oc get services -n destination-ns
+Copy serviceExport external IP --> Add it to 03-replication-source.yaml spec.rsync.address
+
+SSHKEYS=`oc get replicationdestination replication-destination -n destination-ns --template={{.status.rsync.sshKeys}}`
+echo $SSHKEYS --> Add it to 03-replication-source.yaml spec.rsync.sshKeys
+
+oc get secret -n destination-ns $SSHKEYS -o yaml > /tmp/secret.yaml
+modify secret.yaml --> Change namespace to be your SOURCE cluster namespace --> Remove the owner references (.metadata.ownerReferences)
+
+Create secret file on the SOURCE cluster
+oc create -f /tmp/secret.yaml
+
+Create replication source object
+oc create -n source-ns -f 03-replication_source.yaml

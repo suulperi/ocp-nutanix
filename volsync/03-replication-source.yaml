@@ -1,0 +1,15 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: replication-source
+  namespace: source-ns
+spec:
+  sourcePVC: redis #modify this if needed
+  trigger:
+    schedule: "*/3 * * * *" #/*
+  rsync:
+    sshKeys: <your-ssh-keys>
+    address: <Submariner-External-Address>
+    copyMethod: Snapshot
+    storageClassName: nutanix-volume
+    volumeSnapshotClassName: nutanix-snapshot-class

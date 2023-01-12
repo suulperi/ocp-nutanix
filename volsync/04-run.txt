@@ -1,0 +1,2 @@
+oc describe ReplicationSource -n source-ns replication-source <-- check no issues
+oc get replicationdestination replication-destination -n destination-ns --template={{.status.latestImage.name}}

@@ -1,0 +1,13 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: replication-destination
+  namespace: destination-ns
+spec:
+  rsync:
+    serviceType: ClusterIP
+    copyMethod: Snapshot
+    capacity: 2Gi
+    accessModes: [ReadWriteOnce]
+    storageClassName: nutanix-volume
+    volumeSnapshotClassName: nutanix-snapshot-class
