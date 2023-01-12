@@ -48,6 +48,7 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 
 - Be aware YOU have to implement GLB. For demo purposes it can be single HAProxy instance or something similar.
 - Follow the instructions [here](https://github.com/suulperi/submariner-acm) to deploy Guestbook App and Redis Databases.
+- Add some content into Redis Database using Guestbook. Validate both Guestbook instances sees same data after new inserts.
 - It would require Redis Enterprise Cluster to be able to run Redis in Active-Active mode. This scenario just proves how to synchronize data securely between two Redis instances over Submariner IPSec Tunnel. If you want to try a test case which would include losing redis-leader. You need to run command `redis-cli replicaof no one` on redis-follower to change role of it and make it able to write in Redis Database.
 
 ## Use Case 2 - Replicating data on persistent volume level from DC to another
