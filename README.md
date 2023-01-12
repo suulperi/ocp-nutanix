@@ -1,5 +1,5 @@
 # OpenShift 4.11 on Nutanix AHV
-The main idea of the use cases described below is just showing different kind of options for applications' disaster recovery if environment is only having two different physical locations for your OpenShift environments and you want to be in safe if you lost one of your data centers. It's good to be aware if running applications in active-active mode on two different OpenShift clusters your application technologies must support it as well.
+The main idea of the use cases described below is just showing a couple ideas for applications' disaster recovery when IT infrastructure is only having two physical data centers and you want to be in safe if you lost one of your data centers. It's good to be aware if running applications in active-active mode on two different OpenShift clusters your application technologies must support it as well.
 
 Pre-reqs for the setup:
 1. Three OpenShift Container Platforms running version 4.11 running on Nutanix AHV
