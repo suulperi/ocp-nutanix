@@ -3,7 +3,7 @@ The main idea of the use cases described below is just showing a couple ideas fo
 
 Pre-reqs for the setup:
 1. Three OpenShift Container Platforms running version 4.11 running on Nutanix AHV
-   - One acting as Management Cluster - Red Hat ACM (hub). Installation instructions can be found from [here](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.6/html/install/installing#installing-while-connected-online)
+   - One acting as Management Cluster - Red Hat ACM (hub). Installation instructions can be found from [here](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.6/html/install/installing#installing-while-connected-online). In real life scenario your management cluster should be located outside of your two data centers. For example in a public cloud.
    - Two clusters for running applications and managed by Red Hat ACM
 
 2. Nutanix CSI Operator installed (2.6 or later) on each OpenShift Container Platform. Operator can be found from OperatorHub.
