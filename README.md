@@ -25,7 +25,7 @@ spec:
       - enabled: true
         name: iscsid.service
 ```
-4. Create Nutanix VolumesnapShotClass
+4. Create Nutanix VolumesnapShotClass - it will be used with volSync
 ```   apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
