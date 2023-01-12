@@ -40,7 +40,26 @@ deletionPolicy: Delete
 You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create VolumeSnapshotClass. Policies can be found from [here](https://github.com/suulperi/ocp-nutanix/tree/main/policies)
 
 5. Deploy Submariner
-   - add instructions here
+   - At the time of writing this RH ACM did not support deploying Submariner on Red Hat OpenShift Container Platform on Nutanix AHV by using RH ACM Web Console deployment must be done following bare metal instructions.
+   - Take care of next firewall openings are done (between clusters):
+     - IPsec NATT 4500/UDP
+     - VXLAN 4800/UDP
+     - Submariner metrics port 8080/TCP
+     - Globalnet metrics port 8081/TCP
+   - Deploy [these](https://github.com/suulperi/ocp-nutanix/tree/main/submariner) configurations on RH ACM Cluster - change values if currents are not suitable :
+     - `oc create -f 00-managedClusterSet.yaml`
+     - `oc create -f 01-broker.yaml` - if network CIDRs are overlapping on both clusters `globalnetEnabled`value must be `true`
+     - `oc label managedclusters <your-managed-cluster-name> "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite`
+     - `oc label managedclusters <your-managed-cluster-name> "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite`
+     - `oc create -f 03-submarinerconfig-01.yaml` - pay attention on namespace value
+     - `oc create -f 03-submarinerconfig-02.yaml` - pay attention on namespace value
+     - `oc create -f 04-ManagedClusterAddOn-01.yaml` - pay attention on namespace value
+     - `oc create -f 04-ManagedClusterAddOn-02.yaml` - pay attention on namespace value
+
+   - Check Submariner status by using RH ACM Web Console. If everything is green like in image below you are good to continue
+
+![Submariner status](/pics/submariner.png)
+
 7. Install VolSync
    - add instructions here
 ## Use Case 1 - Running workloads in two DCs
