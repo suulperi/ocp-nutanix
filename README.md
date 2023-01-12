@@ -46,6 +46,9 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
 
+- Be aware YOU have to implement GLB. For demo purposes it can be single HAProxy instance or something similar.
+- Follow the instructions [here](https://github.com/suulperi/submariner-acm) to deploy Guestbook App and Redis Databases.
+- It would require Redis Enterprise Cluster to be able to run Redis in Active-Active mode. If you want to try a test case which would include losing redis-leader. You need to run command `redis-cli replicaof no one` on redis-follower to change role of it. 
 
 ## Use Case 2 - Replicating data on persistent volume level from DC to another
 ![volSync Architecture](/pics/volsync-arch.png)
