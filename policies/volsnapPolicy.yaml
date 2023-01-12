@@ -1,0 +1,58 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: add-volume-snapshot
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: add-volume-snapshot
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: snapshot.storage.k8s.io/v1
+                kind: VolumeSnapshotClass
+                metadata:
+                  name: nutanix-snapshot-class
+                driver: csi.nutanix.com
+                parameters:
+                  storageType: NutanixVolumes
+                  csi.storage.k8s.io/snapshotter-secret-name: ntnx-secret
+                  csi.storage.k8s.io/snapshotter-secret-namespace: openshift-cluster-csi-drivers
+                deletionPolicy: Delete
+          remediationAction: enforce
+          severity: high
+  remediationAction: inform
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-add-volume-snapshot
+placementRef:
+  name: placement-add-volume-snapshot
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: add-volume-snapshot
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-add-volume-snapshot
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: platform, operator: In, values: ["nutanix"]}
