@@ -60,8 +60,12 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 
 ![Submariner status](/pics/submariner.png)
 
-7. Install VolSync
-   - add instructions here
+7. Install VolSync using RH ACM Web Console
+   - Select one of the managed clusters from the Clusters page in the hub cluster and choose edit labels.
+      - Add next label for your OCP `addons.open-cluster-management.io/volsync=true`
+   - Repeat previous task on another managed cluster
+   - Verify on both clusters volSync Operator is installed running command `oc get csv -n openshift-operators` 
+   - 
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
 
