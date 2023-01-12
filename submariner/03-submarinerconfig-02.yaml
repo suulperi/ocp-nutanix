@@ -1,0 +1,6 @@
+apiVersion: submarineraddon.open-cluster-management.io/v1alpha1
+kind: SubmarinerConfig
+metadata:
+    name: submariner
+    namespace: ocp-02
+spec: {}

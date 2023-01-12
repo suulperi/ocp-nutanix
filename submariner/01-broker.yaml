@@ -1,0 +1,7 @@
+apiVersion: submariner.io/v1alpha1
+kind: Broker
+metadata:
+  name: submariner-broker
+  namespace: ocp-nutanix-broker
+spec:
+  globalnetEnabled: true

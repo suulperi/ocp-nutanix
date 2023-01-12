@@ -1,0 +1,2 @@
+oc label managedclusters ocp-01 "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite
+oc label managedclusters ocp-02 "cluster.open-cluster-management.io/clusterset=ocp-nutanix" --overwrite

@@ -1,0 +1,2 @@
+oc -n ocp-01 get managedclusteraddons submariner -oyaml
+oc -n ocp-02 get managedclusteraddons submariner -oyaml
