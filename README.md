@@ -39,8 +39,9 @@ deletionPolicy: Delete
 ```
 You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create VolumeSnapshotClass. Policies can be found from [here](https://github.com/suulperi/ocp-nutanix/tree/main/policies)
 5. Deploy Submariner
+add instructions here
 6. Install VolSync
-
+add instructions here
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
 
