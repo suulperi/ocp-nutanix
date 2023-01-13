@@ -109,6 +109,6 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
 - Create a replication source resource on **SOURCE** cluster `oc create -n source-ns -f 03-replication_source.yaml`
 - Verify replication is working without issues on **SOURCE** cluster `oc describe ReplicationSource -n source-ns replication-source`
 - Let's restore PVC from a Snapshot
-![restore pvc](/pics/redis-pvc.png)
+![restore pvc](/pics/restore-pvc.png)
 
 
