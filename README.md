@@ -80,9 +80,23 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 
 This use case could be usable if you are having an stateful application which cannot be scaled out but you want to be sure you have at least data synchronized to another data center. But do remember backups are still mandatory and really usable with containers as well. You must have disaster recovery plan for each application.
 
-- Create Replication Destination
-- Create Submariner serviceExport
-- GET SSH
-- GET Secret
-- Implement Redis on Source Cluster
-- 
+Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configuration files part of volSync configurations
+
+- Create a namespace on **DESTINATION** cluster `oc new-project destination-ns`
+- Create a Replication Destination resource on **DESTINATION** cluster `oc create -f 00-replication-destination.yaml`
+- Create a Submariner serviceExport **DESTINATION** cluster `oc create -f 01-serviceexport.yaml`
+- Get Submariner Service Export external ip `oc get services -n destination-ns` --> Modify 03-replication-source.yaml - add Submariner external IP to address.rsync.spec
+- Get sshKeys SSHKEYS=`oc get replicationdestination replication-destination -n destination-ns --template={{.status.rsync.sshKeys}}`
+- echo $SSHKEYS --> Add output to Add it to 03-replication-source.yaml spec.rsync.sshKeys
+- Get Secret: `oc get secret -n destination-ns $SSHKEYS -o yaml > /tmp/secret.yaml`
+- Modify secret.yaml --> Change namespace to be your **SOURCE**cluster namespace --> Remove the owner references (.metadata.ownerReferences)
+- Create a secret on the **SOURCE** Cluster `oc create -f /tmp/secret.yaml`
+- Create a namespace on **SOURCE** cluster `oc new-project source-ns`
+- Implement Redis on **SOURCE** Cluster using OCP Web Console
+  - Choose Developer from top left corner
+  - Click +Add
+  - Click All Services
+  - Search Redis --> Click it and Click Instantiate Template and Create Redis with default configuration
+  - Check the name of Redis Persistent Volume Claim - it should be Redis
+  - Add name of Redis' PVC to 03-replication-source.yaml spec.sourcePVC
+- Create a replication source resource on **SOURCE** cluster `oc create -n source-ns -f 03-replication_source.yaml`
