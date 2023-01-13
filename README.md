@@ -100,6 +100,7 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
   - Check the name of Redis Persistent Volume Claim - it should be Redis
   - Add name of Redis' PVC to 03-replication-source.yaml spec.sourcePVC
 - Add some content to Redis Database just for verifying replication works properly - Use OpenShift Web Console Terminal for example
+  ![Guestbook Architecture](/pics/redis-cli.png)
   - redis-cli
   - Auth <your-password>
   - Set mykey1 value1
