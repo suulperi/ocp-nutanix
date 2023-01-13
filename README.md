@@ -100,7 +100,7 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
   - Check the name of Redis Persistent Volume Claim - it should be Redis
   - Add name of Redis' PVC to 03-replication-source.yaml spec.sourcePVC
 - Add some content to Redis Database just for verifying replication works properly - Use OpenShift Web Console Terminal for example
-  ![Guestbook Architecture](/pics/redis-cli.png)
+  ![redis-cli commands](/pics/redis-cli.png)
   - redis-cli
   - Auth <your-password>
   - Set mykey1 value1
@@ -108,5 +108,7 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
   - KEYS *
 - Create a replication source resource on **SOURCE** cluster `oc create -n source-ns -f 03-replication_source.yaml`
 - Verify replication is working without issues on **SOURCE** cluster `oc describe ReplicationSource -n source-ns replication-source`
+- Let's restore PVC from a Snapshot
+![restore pvc](/pics/redis-pvc.png)
 
 
