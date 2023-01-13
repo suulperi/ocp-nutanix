@@ -89,14 +89,23 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
 - Get sshKeys SSHKEYS=`oc get replicationdestination replication-destination -n destination-ns --template={{.status.rsync.sshKeys}}`
 - echo $SSHKEYS --> Add output to Add it to 03-replication-source.yaml spec.rsync.sshKeys
 - Get Secret: `oc get secret -n destination-ns $SSHKEYS -o yaml > /tmp/secret.yaml`
-- Modify secret.yaml --> Change namespace to be your **SOURCE**cluster namespace --> Remove the owner references (.metadata.ownerReferences)
-- Create a secret on the **SOURCE** Cluster `oc create -f /tmp/secret.yaml`
+- Modify secret.yaml --> Change namespace to be your **SOURCE** cluster namespace --> Remove the owner references (.metadata.ownerReferences)
+- Create a secret on the **SOURCE** cluster `oc create -f /tmp/secret.yaml`
 - Create a namespace on **SOURCE** cluster `oc new-project source-ns`
-- Implement Redis on **SOURCE** Cluster using OCP Web Console
+- Implement Redis on **SOURCE** cluster using OCP Web Console
   - Choose Developer from top left corner
   - Click +Add
   - Click All Services
   - Search Redis --> Click it and Click Instantiate Template and Create Redis with default configuration
   - Check the name of Redis Persistent Volume Claim - it should be Redis
   - Add name of Redis' PVC to 03-replication-source.yaml spec.sourcePVC
+- Add some content to Redis Database just for verifying replication works properly - Use OpenShift Web Console Terminal for example
+  - redis-cli
+  - Auth <your-password>
+  - Set mykey1 value1
+  - Set mykey2 value2
+  - KEYS *
 - Create a replication source resource on **SOURCE** cluster `oc create -n source-ns -f 03-replication_source.yaml`
+- Verify replication is working without issues on **SOURCE** cluster `oc describe ReplicationSource -n source-ns replication-source`
+
+
