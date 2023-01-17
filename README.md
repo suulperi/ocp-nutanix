@@ -102,7 +102,7 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
 - Add some content to Redis Database just for verifying replication works properly - Use OpenShift Web Console Terminal for example
   ![redis-cli commands](/pics/redis-cli.png)
   - redis-cli
-  - Auth <your-password>
+  - auth your-password
   - Set mykey1 value1
   - Set mykey2 value2
   - KEYS *
