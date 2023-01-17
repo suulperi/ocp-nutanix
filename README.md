@@ -108,7 +108,13 @@ Use [these](https://github.com/suulperi/ocp-nutanix/blob/main/volsync/) configur
   - KEYS *
 - Create a replication source resource on **SOURCE** cluster `oc create -n source-ns -f 03-replication_source.yaml`
 - Verify replication is working without issues on **SOURCE** cluster `oc describe ReplicationSource -n source-ns replication-source`
-- Let's restore PVC from a Snapshot
+- Let's restore PVC from a Snapshot - name it Redis
 ![restore pvc](/pics/restore-pvc.png)
+- Deploy Redis like earlier on the *SOURCE* cluster
+- Verify Redis is having Keys which added in the source cluster
+![verify Redis content](/pics/redis-dst.png)
+
+That's it!
+
 
 
