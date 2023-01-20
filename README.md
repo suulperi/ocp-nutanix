@@ -39,7 +39,10 @@ deletionPolicy: Delete
 ```
 You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create VolumeSnapshotClass. Policies can be found from [here](https://github.com/suulperi/ocp-nutanix/tree/main/policies)
 
-5. Deploy Submariner
+5. OpenShift Image registry configuration
+   - Instructions [here](https://opendocs.nutanix.com/openshift/post-install/)
+
+6. Deploy Submariner
    - At the time of writing this RH ACM did not support deploying Submariner on Red Hat OpenShift Container Platform on Nutanix AHV by using RH ACM Web Console deployment must be done following bare metal instructions.
    - Take care of next firewall openings are done (between clusters):
      - IPsec NATT 4500/UDP
