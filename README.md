@@ -88,8 +88,8 @@ backend guestbook
     http-check send meth GET uri /
     http-check expect string Guestbook
     http-send-name-header Host
-    server guestbook-guestbook.apps.clustername-01.yourdomain.com guestbook-guestbook.apps.clustername-01.yourdomain.com:80 check
-    server guestbook-guestbook.apps.clustername-02.yourdomain.com guestbook-guestbook.apps.clustername-02.yourdomain.com:80 check
+    server guestbook-guestbook.apps.ocp-01.your-domain.example guestbook-guestbook.apps.ocp-01.your-domain.example:80 check
+    server guestbook-guestbook.apps.ocp-02.your-domain.example guestbook-guestbook.apps.ocp-02.your-domain.example:80 check
 ```
 - Follow the instructions [here](https://github.com/suulperi/submariner-acm) to deploy Guestbook App and Redis Databases.
 - Add some content into Redis Database using Guestbook. Validate both Guestbook instances sees same data after new inserts.
