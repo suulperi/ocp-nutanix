@@ -70,7 +70,24 @@ You can also use RH ACM Governance(policies) to enable iSCSI Daemon and create V
 ## Use Case 1 - Running workloads in two DCs
 ![Guestbook Architecture](/pics/guestbook-arch.png)
 
-- Be aware **YOU** have to implement GLB. For demo purposes it can be single HAProxy instance or something similar.
+- Be aware **YOU** have to implement GLB. For demo purposes it can be single HAProxy instance or something similar. Quick and dirty HAProxy configuration below:
+```
+frontend guestbook-glb
+    bind *:80
+    default_backend guestbook
+
+backend guestbook
+    mode http
+    balance roundrobin
+    option forwardfor
+    option httpchk
+    http-check connect
+    http-check send meth GET uri /
+    http-check expect string Guestbook
+    http-send-name-header Host
+    server guestbook-guestbook.apps.clustername-01.yourdomain.com guestbook-guestbook.apps.clustername-01.yourdomain.com:80 check
+    server guestbook-guestbook.apps.clustername-02.yourdomain.com guestbook-guestbook.apps.clustername-02.yourdomain.com:80 check
+```
 - Follow the instructions [here](https://github.com/suulperi/submariner-acm) to deploy Guestbook App and Redis Databases.
 - Add some content into Redis Database using Guestbook. Validate both Guestbook instances sees same data after new inserts.
 - It would require Redis Enterprise Cluster or **Red Hat Data Grid** to be able to run in-memory database in Active-Active mode. This scenario just proves how to synchronize data securely between two Redis instances over Submariner IPSec Tunnel. If you want to try a test case which would include losing redis-leader then you need to run command `redis-cli replicaof no one` on redis-follower to change role of it and make it able to write in Redis Database.
